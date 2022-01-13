@@ -1,5 +1,5 @@
 // Variables for BMR Calculator
-let weight, height, age, gender, selectGender, maleBMR, femaleBMR, validBMR, selectActivityLevel, activityLevel, TDEE;
+let weight, height, age, gender, selectGender, maleBMR, femaleBMR, validBMR, selectActivityLevel, activityLevel, TDEE, validTDEE, weightLoss, weightLossCalories;
 
 // Obtaining User Gender Function
 function genderUpdate () {
@@ -23,17 +23,17 @@ function BMRCalculator () {
     validBMR = false;
 
     if (!validBMR) {
-        if ((gender == "Male" && isNaN(maleBMR)) || (gender == "Female" && isNaN(femaleBMR)) || (gender == "Blank") || (weight <= 0) || (height <= 0) || (age <= 0) || (maleBMR <= 0) || (femaleBMR <= 0)) {
-            validBMR = false;
-            document.getElementById("resultBMR").innerHTML = "Sorry, one of the parameters is incorrect."
-        }
-        else if (gender == "Male") {
+        if (gender == "Male" && maleBMR !== NaN && maleBMR > 0 && weight > 0 && height > 0 && age > 0) {
             validBMR = true;
-            document.getElementById("resultBMR").innerHTML = "Your BMR is: " + maleBMR + " calories."
+            document.getElementById("resultBMR").innerHTML = "Your BMR is: " + Math.round(maleBMR) + " calories."
+        }
+        else if (gender == "Female" && femaleBMR !== NaN && maleBMR > 0 && weight > 0 && height > 0 && age > 0) {
+            validBMR = true;
+            document.getElementById("resultBMR").innerHTML = "Your BMR is: " + Math.round(femaleBMR) + " calories."
         }
         else {
-            validBMR = true;
-            document.getElementById("resultBMR").innerHTML = "Your BMR is: " + femaleBMR + " calories."
+            validBMR = false;
+            document.getElementById("resultBMR").innerHTML = "Sorry, one of the parameters is incorrect."
         }
     }
 }
@@ -47,59 +47,108 @@ function activityLevelUpdate () {
 
 // TDEE Calculator Function
 function TDEECalculator () {
-    if (validBMR = true && gender == "Male") {
+    validTDEE = false;
+    if (validBMR == true && gender == "Male") {
         switch(activityLevel) {
             case "Blank":
+                validTDEE = false;
+                document.getElementById("resultTDEE").innerHTML = "Please select an activity level."
                 break;
             case "Sedentary":
+                validTDEE = true;
                 TDEE = 1.2 * maleBMR;
-                document.getElementById("resultTDEE").innerHTML = "Your TDEE is: " + TDEE + " calories."
+                document.getElementById("resultTDEE").innerHTML = "Your TDEE is: " + Math.round(TDEE) + " calories."
                 break;
             case "Slightly Active":
+                validTDEE = true;
                 TDEE = 1.375 * maleBMR;
-                document.getElementById("resultTDEE").innerHTML = "Your TDEE is: " + TDEE + " calories."
+                document.getElementById("resultTDEE").innerHTML = "Your TDEE is: " + Math.round(TDEE) + " calories."
                 break;
             case "Moderately Active":
+                validTDEE = true;
                 TDEE = 1.55 * maleBMR;
-                document.getElementById("resultTDEE").innerHTML = "Your TDEE is: " + TDEE + " calories."
+                document.getElementById("resultTDEE").innerHTML = "Your TDEE is: " + Math.round(TDEE) + " calories."
                 break;
             case "Very Active":
+                validTDEE = true;
                 TDEE = 1.725 * maleBMR;
-                document.getElementById("resultTDEE").innerHTML = "Your TDEE is: " + TDEE + " calories."
+                document.getElementById("resultTDEE").innerHTML = "Your TDEE is: " + Math.round(TDEE) + " calories."
                 break;
             case "Extra Active":
+                validTDEE = true;
                 TDEE = 1.9 * maleBMR;
-                document.getElementById("resultTDEE").innerHTML = "Your TDEE is: " + TDEE + " calories."
+                document.getElementById("resultTDEE").innerHTML = "Your TDEE is: " + Math.round(TDEE) + " calories."
                 break;
         }
     }
-    else if (validBMR = true && gender == "Female") {
+    else if (validBMR == true && gender == "Female") {
         switch(activityLevel) {
             case "Blank":
+                validTDEE = false;
+                document.getElementById("resultTDEE").innerHTML = "Please select an activity level."
                 break;
             case "Sedentary":
+                validTDEE = true;
                 TDEE = 1.2 * femaleBMR;
-                document.getElementById("resultTDEE").innerHTML = "Your TDEE is: " + TDEE + " calories."
+                document.getElementById("resultTDEE").innerHTML = "Your TDEE is: " + Math.round(TDEE) + " calories."
                 break;
             case "Slightly Active":
+                validTDEE = true;
                 TDEE = 1.375 * femaleBMR;
-                document.getElementById("resultTDEE").innerHTML = "Your TDEE is: " + TDEE + " calories."
+                document.getElementById("resultTDEE").innerHTML = "Your TDEE is: " + Math.round(TDEE) + " calories."
                 break;
             case "Moderately Active":
+                validTDEE = true;
                 TDEE = 1.55 * femaleBMR;
-                document.getElementById("resultTDEE").innerHTML = "Your TDEE is: " + TDEE + " calories."
+                document.getElementById("resultTDEE").innerHTML = "Your TDEE is: " + Math.round(TDEE) + " calories."
                 break;
             case "Very Active":
+                validTDEE = true;
                 TDEE = 1.725 * femaleBMR;
-                document.getElementById("resultTDEE").innerHTML = "Your TDEE is: " + TDEE + " calories."
+                document.getElementById("resultTDEE").innerHTML = "Your TDEE is: " + Math.round(TDEE) + " calories."
                 break;
             case "Extra Active":
+                validTDEE = true;
                 TDEE = 1.9 * femaleBMR;
-                document.getElementById("resultTDEE").innerHTML = "Your TDEE is: " + TDEE + " calories."
+                document.getElementById("resultTDEE").innerHTML = "Your TDEE is: " + Math.round(TDEE) + " calories."
                 break;
         }
     }
     else {
-        document.getElementById("resultTDEE").innerHTML = "Sorry, you must calculate your correct BMR first."
+        validTDEE = false;
+        document.getElementById("resultTDEE").innerHTML = "Sorry, you must calculate your BMR first."
+    }
+}
+
+// Obtaining User Weight Loss Goal
+function weightLossUpdate () {
+    selectWeightLoss = document.getElementById("weightLossBox");
+    weightLoss = selectWeightLoss.options[selectWeightLoss.selectedIndex].value;
+    console.log(`Weight Loss Goal: ${weightLoss}`) // Check to make sure 'weightLoss' variable is being inputted correctly
+}
+
+// Weight Loss Calculator Function
+function weightLossCalculator () {
+    if (validTDEE == true) {
+        switch(weightLoss) {
+            case "Blank":
+                document.getElementById("resultWeightLoss").innerHTML = "Please select a weight loss goal."
+                break;
+            case "Moderate":
+                weightLossCalories = TDEE - (TDEE * 0.1);
+                document.getElementById("resultWeightLoss").innerHTML = "Your caloric intake should be " + Math.round(weightLossCalories) + " calories."
+                break;
+            case "Aggressive":
+                weightLossCalories = TDEE - (TDEE * 0.15);
+                document.getElementById("resultWeightLoss").innerHTML = "Your caloric intake should be " + Math.round(weightLossCalories) + " calories."
+                break;
+            case "More Aggressive":
+                weightLossCalories = TDEE - (TDEE * 0.20);
+                document.getElementById("resultWeightLoss").innerHTML = "Your caloric intake should be " + Math.round(weightLossCalories) + " calories."
+                break;
+        }
+    }
+    else {
+        document.getElementById("resultWeightLoss").innerHTML = "Sorry, you must calculate your TDEE first."
     }
 }

@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>BMR and TDEE Calculator</title>
+        <title>BMR, TDEE, and Weight Loss Calculator</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -10,7 +10,7 @@
 <!--Opening and Definition of BMR-->
     <body>
         <div class="container">
-            <h1>BMR and TDEE Calculators</h1>
+            <h1>BMR, TDEE, and Weight Loss Calculators</h1>
             <br>
             <div class="row">
                 <div class="col-md-7">
@@ -66,13 +66,32 @@
                     <br>
                     <p id="resultTDEE"></p>
                     <br>
+<!--Definition of Weight Loss-->
+                    <h2>About the Weight Loss Calculator</h2>
+                    <p>In this section, you can calculate how many calories you should be eating with a weight loss goal in mind.</p>
+                    <p>Once you have figured out your BMR and TDEE, you can calculate your caloric intake with a weight loss goal in mind by responding to the form below.</p>  
+<!--Prompts for User for Weight Loss Calculator-->
+                    <p>What is your weight loss goal?</p>
+                    <select id="weightLossBox" onchange="weightLossUpdate ()">
+                        <option value="Blank"></option>
+                        <option value="Moderate">Moderate (10% Caloric Deficit)</option>
+                        <option value="Aggressive">Aggressive (15% Caloric Deficit)</option>
+                        <option value="More Aggressive">More Aggressive (20% Caloric Deficit)</option>
+                    </select>
+                    <br>
+                    <br>
+                    <button class="submitWeightLoss" type="button" onclick="weightLossCalculator ()">Submit</button>
+                    <br>
+                    <br>
+                    <p id="resultWeightLoss"></p>
                 </div>
+<!--White Space-->
                 <div class="col-md-1">
                 </div>
 <!--About the Creators and Basis of Application-->
                 <div class="col-md-4">
                     <h3>About This Application</h3>
-                    <p>This is Edrice Sediq and Fredrik Eriksson's first application. The following inputs are taken from the user: weight, height, age, gender, and activity level. The output thus far is the BMR and TDEE of the user based on the user inputs. The program will also respond appropriately to invalid inputs.</p>
+                    <p>This is Edrice Sediq and Fredrik Eriksson's first application. The following inputs are taken from the user: weight, height, age, gender, activity level, and weight loss goal. The output thus far is the BMR, TDEE, and weight loss caloric intake of the user based on the user inputs. The program will also respond appropriately to invalid inputs.</p>
                 </div>
             </div>
         </div>
